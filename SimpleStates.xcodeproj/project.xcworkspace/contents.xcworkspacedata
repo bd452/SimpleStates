@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:StatefulTests.xcodeproj">
+      location = "self:/Users/Bryce/projects/StatefulTests/SimpleStates.xcodeproj">
    </FileRef>
 </Workspace>
