@@ -19,6 +19,10 @@
 		023B233A246C3D8E009A6F6D /* SimpleStates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023B2324246C0CF4009A6F6D /* SimpleStates.framework */; };
 		023B233B246C3D8E009A6F6D /* SimpleStates.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 023B2324246C0CF4009A6F6D /* SimpleStates.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		023B2340246C3EBD009A6F6D /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023B233F246C3EBD009A6F6D /* HelperFunctions.swift */; };
+		023B2344246C5E0B009A6F6D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 023B2343246C5E0A009A6F6D /* Podfile */; };
+		023B2346246C5E4E009A6F6D /* SimpleStates.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 023B2345246C5E4E009A6F6D /* SimpleStates.podspec */; };
+		5AE9BECE12581697EF3FAFE3 /* Pods_SimpleStates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0928B78DA0CDC623E0280703 /* Pods_SimpleStates.framework */; };
+		D20ACC0BC6547E3ECFC62150 /* Pods_StatefulTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E2203F575C611E40CBD30C8 /* Pods_StatefulTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +64,14 @@
 		023B2333246C0D28009A6F6D /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		023B2337246C21A9009A6F6D /* BundledKeyPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundledKeyPath.swift; sourceTree = "<group>"; };
 		023B233F246C3EBD009A6F6D /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
+		023B2343246C5E0A009A6F6D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		023B2345246C5E4E009A6F6D /* SimpleStates.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = SimpleStates.podspec; sourceTree = "<group>"; };
+		0928B78DA0CDC623E0280703 /* Pods_SimpleStates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleStates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E2203F575C611E40CBD30C8 /* Pods_StatefulTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatefulTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BECA5E2CE114A731C549CA2 /* Pods-SimpleStates.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleStates.release.xcconfig"; path = "Target Support Files/Pods-SimpleStates/Pods-SimpleStates.release.xcconfig"; sourceTree = "<group>"; };
+		7A953873A87217006EDBF24E /* Pods-StatefulTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatefulTests.debug.xcconfig"; path = "Target Support Files/Pods-StatefulTests/Pods-StatefulTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C576D68AE5734951C9FB902C /* Pods-SimpleStates.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleStates.debug.xcconfig"; path = "Target Support Files/Pods-SimpleStates/Pods-SimpleStates.debug.xcconfig"; sourceTree = "<group>"; };
+		D7C817D764460DFA4B91E5C5 /* Pods-StatefulTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StatefulTests.release.xcconfig"; path = "Target Support Files/Pods-StatefulTests/Pods-StatefulTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				023B233A246C3D8E009A6F6D /* SimpleStates.framework in Frameworks */,
+				D20ACC0BC6547E3ECFC62150 /* Pods_StatefulTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AE9BECE12581697EF3FAFE3 /* Pods_SimpleStates.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,10 +98,13 @@
 		023B22FF246C0CD1009A6F6D = {
 			isa = PBXGroup;
 			children = (
+				023B2345246C5E4E009A6F6D /* SimpleStates.podspec */,
+				023B2343246C5E0A009A6F6D /* Podfile */,
 				023B230A246C0CD1009A6F6D /* StatefulTests */,
 				023B2325246C0CF4009A6F6D /* SimpleStates */,
 				023B2309246C0CD1009A6F6D /* Products */,
 				023B2339246C3D8E009A6F6D /* Frameworks */,
+				88C10850AA1724E67C23B959 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,8 +146,21 @@
 		023B2339246C3D8E009A6F6D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0928B78DA0CDC623E0280703 /* Pods_SimpleStates.framework */,
+				0E2203F575C611E40CBD30C8 /* Pods_StatefulTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		88C10850AA1724E67C23B959 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C576D68AE5734951C9FB902C /* Pods-SimpleStates.debug.xcconfig */,
+				5BECA5E2CE114A731C549CA2 /* Pods-SimpleStates.release.xcconfig */,
+				7A953873A87217006EDBF24E /* Pods-StatefulTests.debug.xcconfig */,
+				D7C817D764460DFA4B91E5C5 /* Pods-StatefulTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +181,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 023B231C246C0CD2009A6F6D /* Build configuration list for PBXNativeTarget "StatefulTests" */;
 			buildPhases = (
+				9CD9BDFE900ED5EA02790784 /* [CP] Check Pods Manifest.lock */,
 				023B2304246C0CD1009A6F6D /* Sources */,
 				023B2305246C0CD1009A6F6D /* Frameworks */,
 				023B2306246C0CD1009A6F6D /* Resources */,
@@ -170,6 +201,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 023B232D246C0CF4009A6F6D /* Build configuration list for PBXNativeTarget "SimpleStates" */;
 			buildPhases = (
+				476F80757C88F2AC2F3F9D90 /* [CP] Check Pods Manifest.lock */,
 				023B231F246C0CF4009A6F6D /* Headers */,
 				023B2320246C0CF4009A6F6D /* Sources */,
 				023B2321246C0CF4009A6F6D /* Frameworks */,
@@ -227,8 +259,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				023B2346246C5E4E009A6F6D /* SimpleStates.podspec in Resources */,
 				023B2318246C0CD2009A6F6D /* LaunchScreen.storyboard in Resources */,
 				023B2315246C0CD2009A6F6D /* Assets.xcassets in Resources */,
+				023B2344246C5E0B009A6F6D /* Podfile in Resources */,
 				023B2313246C0CD1009A6F6D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +275,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		476F80757C88F2AC2F3F9D90 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SimpleStates-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CD9BDFE900ED5EA02790784 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StatefulTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		023B2304246C0CD1009A6F6D /* Sources */ = {
@@ -409,6 +490,7 @@
 		};
 		023B231D246C0CD2009A6F6D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A953873A87217006EDBF24E /* Pods-StatefulTests.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -428,6 +510,7 @@
 		};
 		023B231E246C0CD2009A6F6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D7C817D764460DFA4B91E5C5 /* Pods-StatefulTests.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -447,6 +530,7 @@
 		};
 		023B232E246C0CF4009A6F6D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C576D68AE5734951C9FB902C /* Pods-SimpleStates.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -477,6 +561,7 @@
 		};
 		023B232F246C0CF4009A6F6D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BECA5E2CE114A731C549CA2 /* Pods-SimpleStates.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
