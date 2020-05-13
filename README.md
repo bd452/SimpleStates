@@ -1,10 +1,10 @@
 # SimpleStates
 
-Dead simple states for reactive programming in Swift
-
 [![Version](https://img.shields.io/cocoapods/v/SimpleStates.svg?style=flat)](https://cocoapods.org/pods/SimpleStates)
 [![License](https://img.shields.io/cocoapods/l/SimpleStates.svg?style=flat)](https://cocoapods.org/pods/SimpleStates)
 [![Platform](https://img.shields.io/cocoapods/p/SimpleStates.svg?style=flat)](https://cocoapods.org/pods/SimpleStates)
+
+Dead simple states for reactive programming in Swift
 
 Allows you to attach a "State" to a given property in Swift, and have that property change whenever the state does.
 
