@@ -2,15 +2,22 @@
 
 Dead simple states for reactive programming in Swift
 
+[![Version](https://img.shields.io/cocoapods/v/SimpleStates.svg?style=flat)](https://cocoapods.org/pods/SimpleStates)
+[![License](https://img.shields.io/cocoapods/l/SimpleStates.svg?style=flat)](https://cocoapods.org/pods/SimpleStates)
+[![Platform](https://img.shields.io/cocoapods/p/SimpleStates.svg?style=flat)](https://cocoapods.org/pods/SimpleStates)
+
 Allows you to attach a "State" to a given property in Swift, and have that property change whenever the state does.
 
 And it's a lot more lightweight and easy to understand when compared to ReactiveSwift and the like (though if you're going to be doing any heavy lifting you should probably use those).
 
 ## Installation
 
-I haven't added this to Cocoapods yet, so you'll have to download the repo and add it as a subproject.
+SimpleStates is available through [CocoaPods](https://cocoapods.org). To install
+it, simply add the following line to your Podfile:
 
-Other than that it should be pretty plug-and-play
+```ruby
+pod 'SimpleStates'
+```
 
 ## Usage
 
