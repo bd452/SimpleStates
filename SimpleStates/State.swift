@@ -59,9 +59,10 @@ protocol StateProtocol {
  * A State Object
  * Holds state values and delegates notifications to values that need to be changed
  */
-public class State<T>: StateProtocol {
+open class State<T>: StateProtocol {
     internal var data:T
     internal var listeners: [Binding: (T)->Void] = [:]
+    var onDeinit: (()->Void)?
     
     public init(_ initialValue: T) {
         self.data = initialValue
@@ -91,7 +92,7 @@ public class State<T>: StateProtocol {
         return self.data
     }
     
-    /// Same as bind(bundledKeyPath) but for optionals
+    /// Bind a BundledKeyPath to the state
     /// - Parameter bundledKeyPath: KeyPath to target value
     /// - Returns: identifier of the binding
     @discardableResult public func bind<U: AnyBundledKeyPath>(_ bundledKeyPath: U)->Binding {
