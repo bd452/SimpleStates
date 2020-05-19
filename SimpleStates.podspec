@@ -2,7 +2,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "SimpleStates"
-  spec.version      = "0.1.2"
+  spec.version      = "0.1.3"
   spec.summary      = "Dead simple states for reactive programming in Swift."
 
   spec.description  = <<-DESC
