@@ -12,9 +12,13 @@ import Foundation
 public class KVOState<U: NSObject, T>: State<T> {
     
     private var observer: NSKeyValueObservation!
+    private weak var obj: U?
+    private var keyPath: KeyPath<U,T>
     
     public init(obj: U, keyPath: KeyPath<U, T>) {
         let defaultValue = obj[keyPath: keyPath]
+        self.obj = obj
+        self.keyPath = keyPath
         super.init(defaultValue)
         self.observer = obj.observe(keyPath, options: .new, changeHandler: { (obj, change) in
             if let newValue = change.newValue {

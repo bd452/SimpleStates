@@ -21,25 +21,105 @@ pod 'SimpleStates'
 
 ## Usage
 
-import it
+Basic usage:
 
 ```swift
 import SimpleStates
+let myState = State("hello")
+
+let label = UILabel(CGRect(x: 0, y: 0, width: 100, height: 20))
+
+var changingString = "initial"
+
+myState.bind(label, .\text)
+// label.text is now "hello"
+
+myState.on({ newValue in 
+	changingString = newValue
+})
+// changingString is now "hello"
+
+myState.set("hello world")
+// label.text and changingString are both now "hello world"
+
 ```
 
-### Creating and Binding the State
+### Types of State
 
-First, you have to create a `State` object, and assign it a default value. 
+There are 3 types of state provided:
 
-It doesn't matter where you actually declare or store the value, but I prefer to keep it as a class `let` property. If you feel so inclined, you can even keep it on some Singleton somewhere so you can access it from anywhere in your application (though I wouldn't recommend it).
+#### A regular State
 
-There are a few ways to actually create the object. The first (and easiest) is to just instantiate it with a default value (this default value can be any Swift type) , like so:
+ Holds a value and updates observers when it has been changed by the user. 
+
+Constructed as such:
 
 ```swift
-let myState = State("Text")
+let myState = State(defaultValue) 
 ```
 
-Then, to use it, you bind it to a property.
+Or, you can also explicitly set the type of the state if you don't want to rely on the compiler's inference:
+
+```swift
+let myState = State<CGFloat>(1.0) // would normally be Float
+```
+
+#### A NotificationCenter State
+
+Updates the observer when a notification is fired
+
+These can be constructed in 2 ways.
+
+The first takes 3 arguments: the notification to listen for, the initial value of the state, and a closure that translates the `Notification` parameter from the notification and returns the value you want to set the state to.
+
+```swift
+let isPortrait = NotificationState(
+  UIDevice.orientationDidChangeNotification, 
+  default: "",
+	mutator: { notif in 
+  	return notif.description
+  }
+)
+```
+
+If you don't need the value of the notification parameter, you can construct the state by passing only the notification to listen for and a property getter
+
+```swift
+let isPortrait = NotificationState(
+  UIDevice.orientationDidChangeNotification, 
+  getter: UIDevice.current.orientation
+)
+```
+
+That will update the value of the state to UIDevice.current.orientation whenever a notification is received
+
+#### A Key-Value Observing State
+
+Observes a given KVO-conforming property and updates the state when it changes
+
+This is initialized with an object and a KeyPath to a property on that object, like so:
+
+```swift
+let myState = KVOState(obj: myObject, keyPath: \.propertyName)
+```
+
+Normally the property value of the KVO state is immutable so that it remains consistent with the property it is tracking. If the tracked property itself is mutable and you want to change it, then you can use `MutableKVOState`, and then later set the value of the backing variable with .setValue.
+
+```swift
+let myState = MutableKVOState(obj: myObject, keyPath: \.propertyName)
+```
+
+Ordinarily you can just use myObject.propertyName = newValue and it will have the same effect, but this will allow you to update the state in case you don't have a reference to it laying around.
+
+#### Note
+
+A KVOState will not keep a reference to its bound object around in order to avoid memory leaks, so you'll have to make sure it doesn't get deallocated yourself.
+
+### Binding the State
+
+A state can be bound to a property of a given class, so that it will update that property whenever it is updated.
+
+This can be done in a few ways:
 
 ```swift
 let label = UILabel()
@@ -50,8 +130,10 @@ myState.bind(label, .\text)
 // or with a BundledKeyPath (more on that later)
 myState(label..\.text)
 
-// or with some nice sugar
+// or with some nice helper functions
 label..\.text <-> myState
+
+/// These all do the exact same thing
 ```
 
 The first option is a function that takes 2 arguments, an object and a `KeyPath` that points to the property you want to bind to. Simple.
@@ -64,11 +146,11 @@ That last option is a combination of a couple of helper functions.
 
 `<->` : This binds a given `BundledKeyPath` to a `State`.
 
-When you set the binding, the property will immediately update to the value of the state, and will update whenever the state is updated.
+When you set the binding, the property will immediately update to the value of the state, and will update whenever the state's value is updated.
 
 ### Updating the state
 
-To actually set the state, you use the `State.set` method
+To update the value of a vanilla state, you use the `State.set` method
 
 ```swift
 myState.set("New Text")
@@ -76,11 +158,13 @@ myState.set("New Text")
 
 `label.text` has now been updated with our new value (and UIKit will automatically update as well)
 
-That's it!
+#### Note: 
+
+KVOState and NotificationState will update automatically and cannot be set manually
 
 ### Getting the current value of the state
 
-To get the current value, just call `State.get()`
+To get the current value without attaching a listener, just call `State.get()`
 
 ```swift
 let myState = State("Text")
@@ -108,13 +192,37 @@ myState.set("hello world")
 
 /// label.text is now "hello world 😀"
 ```
-For use with a table view, you would just tell the view to reload from within the closure. 
+For use with a table view, for example, you could tell the view to reload from within the closure, then call .get() in the actual rendering method. The tableView will re-render whenever you call dataSource.set.
 
-Also, `State.on` closures are always called on the main queue, so you don't have to worry about doing that yourself.
+```swift
+let dataSource = State<[String]>([])
 
-### Unbinding
+override func viewDidLoad() {
+	super.viewDidLoad()
+	dataSource.on({ _ in 
+  	self.tableView.reloadData()
+  })
+}
 
-Whenever you create a binding, a unique ID will be returned that allows you to later unbind with `State.unBind`
+
+override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+	cell.titleLabel.text = dataSource.get()[indexPath.row]
+  // Configure the cell...
+
+  return cell
+}
+```
+
+Of course, you could use `didSet` on a normal property to do this specifically, but it's just an example :slightly_smiling_face:
+
+#### Note
+
+`State.on` closures are always called on the main queue, so you don't have to worry about doing UI updates from within them
+
+### Unbinding a Property from a State
+
+Whenever you create a binding, a `Binding` will be returned that allows you to later unbind with `State.unBind`
 
 ```swift
 let myState = State("Text")
@@ -132,9 +240,23 @@ myState.set("Goodbye World")
 
 ```
 
-
-
 ### Alternate methods
+
+You can create a state inline with a default binding, but this will not allow you to unbind it in the future.
+
+```swift
+let myLabel = UILabel()
+
+let myState = boundState(myLabel..\.text, "Text")
+
+/// myLabel.text is now "Text"
+
+myState.set("New Text")
+
+/// myLabel.text is now "New Text"
+```
+
+
 
 You can also create a state object with syntax similar to React's state hook
 
@@ -160,22 +282,6 @@ getMyState()
 /// returns "New Text"
 ```
 
-
-
-You can also create a state inline with a default binding, but this will not allow you to unbind it in the future.
-
-```swift
-let myLabel = UILabel()
-
-let myState = boundState(myLabel..\.text, "Text")
-
-/// myLabel.text is now "Text"
-
-myState.set("New Text")
-
-/// myLabel.text is now "New Text"
-```
-
 ### Bundled Key Paths
 
 To make life easier when making the bindings, there's a struct `BundledKeyPath` that exists just to hold a reference to a KeyPath and an object on which it resides.
@@ -192,8 +298,17 @@ let bkp = myLabel..\.text
 
 This just makes it easier to construct a binding with the given infix functions, since we need both a reference to the object and the KeyPath to actually set the given property, and Swift doesn't let us make our own Ternary operators.
 
- It's totally not necessary to use them if you don't want to.
+You can also use these when constructing a `MutableKVOState`:
 
+```swift
+let state = MutableKVOState(myClass..\.myKVOConformingProperty)
+```
+
+#### Note
+
+BundledKeyPaths are always mutable, as an immutable property can't be bound to a state (for obvious reasons). They cannot be created with a get-only property.
+
+----
 
 **That's it!**. Let me know if you have any questions!
 
