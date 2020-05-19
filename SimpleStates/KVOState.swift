@@ -9,21 +9,11 @@
 import Foundation
 
 
-public class KVOState<T>: State<T> {
+public class KVOState<U: NSObject, T>: State<T> {
     
     private var observer: NSKeyValueObservation!
     
-    public init<U: NSObject>(link: BundledKeyPath<U,T>) {
-        let defaultValue = link.object[keyPath: link.path]
-        super.init(defaultValue)
-        self.observer = link.object.observe(link.path, options: [.new]) { (obj, change) in
-            if let newValue = change.newValue {
-                super.set(newValue)
-            }
-        }
-    }
-    
-    public init<U: NSObject>(obj: U, keyPath: KeyPath<U, T>) {
+    public init(obj: U, keyPath: KeyPath<U, T>) {
         let defaultValue = obj[keyPath: keyPath]
         super.init(defaultValue)
         self.observer = obj.observe(keyPath, options: .new, changeHandler: { (obj, change) in
@@ -33,9 +23,9 @@ public class KVOState<T>: State<T> {
         })
     }
     
-    @available (*, unavailable)
+    @available (*, unavailable , message: "Can't change the value of a KVOState. Try MutableKVOState.setValue")
     public override func set(_ newValue: T) {
-        super.set(newValue)
+        
     }
     
     deinit {

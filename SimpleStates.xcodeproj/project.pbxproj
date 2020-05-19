@@ -23,6 +23,7 @@
 		023B2346246C5E4E009A6F6D /* SimpleStates.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 023B2345246C5E4E009A6F6D /* SimpleStates.podspec */; };
 		02725A60247360F2003094BD /* KVOState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02725A5E247360F1003094BD /* KVOState.swift */; };
 		02725A61247360F2003094BD /* NotificationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02725A5F247360F1003094BD /* NotificationState.swift */; };
+		02725A6D24736E4F003094BD /* MutableKVOState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02725A6C24736E4F003094BD /* MutableKVOState.swift */; };
 		5AE9BECE12581697EF3FAFE3 /* Pods_SimpleStates.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0928B78DA0CDC623E0280703 /* Pods_SimpleStates.framework */; };
 		D20ACC0BC6547E3ECFC62150 /* Pods_StatefulTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E2203F575C611E40CBD30C8 /* Pods_StatefulTests.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		023B2345246C5E4E009A6F6D /* SimpleStates.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = SimpleStates.podspec; sourceTree = "<group>"; };
 		02725A5E247360F1003094BD /* KVOState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KVOState.swift; sourceTree = "<group>"; };
 		02725A5F247360F1003094BD /* NotificationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationState.swift; sourceTree = "<group>"; };
+		02725A6C24736E4F003094BD /* MutableKVOState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableKVOState.swift; sourceTree = "<group>"; };
 		0928B78DA0CDC623E0280703 /* Pods_SimpleStates.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleStates.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E2203F575C611E40CBD30C8 /* Pods_StatefulTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StatefulTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BECA5E2CE114A731C549CA2 /* Pods-SimpleStates.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleStates.release.xcconfig"; path = "Target Support Files/Pods-SimpleStates/Pods-SimpleStates.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				023B2326246C0CF4009A6F6D /* SimpleStates.h */,
 				023B233F246C3EBD009A6F6D /* HelperFunctions.swift */,
 				02725A5E247360F1003094BD /* KVOState.swift */,
+				02725A6C24736E4F003094BD /* MutableKVOState.swift */,
 				02725A5F247360F1003094BD /* NotificationState.swift */,
 				023B2333246C0D28009A6F6D /* State.swift */,
 				023B2337246C21A9009A6F6D /* BundledKeyPath.swift */,
@@ -349,6 +352,7 @@
 				02725A61247360F2003094BD /* NotificationState.swift in Sources */,
 				02725A60247360F2003094BD /* KVOState.swift in Sources */,
 				023B2338246C21A9009A6F6D /* BundledKeyPath.swift in Sources */,
+				02725A6D24736E4F003094BD /* MutableKVOState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

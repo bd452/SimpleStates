@@ -24,6 +24,12 @@ infix operator <->: AssignmentPrecedence
 @discardableResult public func <-><T, U>(arg1: BundledKeyPath<U, T>, state: State<T>)->Binding {
     return state.bind(arg1)
 }
+@discardableResult public func <-><T, U>(arg1: BundledKeyPath<U, T>, state: State<T>?)->Binding? {
+    return state?.bind(arg1)
+}
 @discardableResult public func <-><T, U>(arg1: BundledKeyPath<U, T?>, state: State<T>)->Binding {
     return state.bind(arg1)
+}
+@discardableResult public func <-><T, U>(arg1: BundledKeyPath<U, T?>, state: State<T>?)->Binding? {
+    return state?.bind(arg1)
 }

@@ -34,32 +34,11 @@ public func useState<T>(_ initialValue: T)->getterSetter<T> {
 }
 
 
-protocol StateProtocol {
-
-    associatedtype T
-
-    @discardableResult func on(_ cb: @escaping (T)->Void)->Binding
-    func set(_ newValue: T)
-    func get()->T
-    @discardableResult func bind<U: AnyBundledKeyPath>(_ bundledKeyPath: U)->Binding
-    @discardableResult func bind<U>(_ obj: U, _ keyPath: ReferenceWritableKeyPath<U,T>)->Binding
-    @discardableResult func bind<U>(_ obj: U, _ keyPath: ReferenceWritableKeyPath<U,T?>)->Binding
-    func unBind(binding: Binding)
-    @discardableResult func bind<U: AnyBundledKeyPath>(_ keyPaths: [U])->[Binding]
-    @discardableResult func bind<U>(_ tuples: [(U, ReferenceWritableKeyPath<U, T>)])->[Binding]
-    @discardableResult func bind<U>(_ tuples: [(U, ReferenceWritableKeyPath<U, T?>)])->[Binding]
-    @discardableResult func callAsFunction<U: AnyBundledKeyPath>(_ bundledKeyPath: U)->Self
-    @discardableResult func callAsFunction<U>(_ obj: U, _ keyPath: ReferenceWritableKeyPath<U,T>)->Self
-    @discardableResult func callAsFunction<U>(_ obj: U, _ keyPath: ReferenceWritableKeyPath<U,T?>)->Self
-    @discardableResult func callAsFunction(_ cb: @escaping (T)->Void)->Self
-}
-
-
 /**
  * A State Object
  * Holds state values and delegates notifications to values that need to be changed
  */
-open class State<T>: StateProtocol {
+open class State<T> {
     internal var data:T
     internal var listeners: [Binding: (T)->Void] = [:]
     var onDeinit: (()->Void)?
@@ -78,13 +57,17 @@ open class State<T>: StateProtocol {
         return id
     }
     
+    public func updateListeners() {
+        self.listeners.values.forEach { (callback) in
+            DispatchQueue.main.async(execute: {[unowned self] in callback(self.data)})
+        }
+    }
+    
     /// Updates the value of the state
     /// - Parameter newValue: the new value to update to
     public func set(_ newValue: T) {
         self.data = newValue
-        self.listeners.values.forEach { (callback) in
-            DispatchQueue.main.async(execute: {callback(newValue)})
-        }
+        self.updateListeners()
     }
     /// Gets the current value of the state
     /// - Returns: The current value of the state
