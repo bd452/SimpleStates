@@ -18,7 +18,7 @@ public class KVOState<T>: State<T> {
         super.init(defaultValue)
         self.observer = link.object.observe(link.path, options: [.new]) { (obj, change) in
             if let newValue = change.newValue {
-                self.set(newValue)
+                super.set(newValue)
             }
         }
     }
@@ -28,9 +28,14 @@ public class KVOState<T>: State<T> {
         super.init(defaultValue)
         self.observer = obj.observe(keyPath, options: .new, changeHandler: { (obj, change) in
             if let newValue = change.newValue {
-                self.set(newValue)
+                super.set(newValue)
             }
         })
+    }
+    
+    @available (*, unavailable)
+    public override func set(_ newValue: T) {
+        super.set(newValue)
     }
     
     deinit {

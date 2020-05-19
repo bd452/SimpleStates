@@ -15,9 +15,14 @@ public class NotificationState<T>: State<T> {
     
     public init(notification: NSNotification.Name, defaultValue: T, mutator: @escaping (Notification)->T) {
         super.init(defaultValue)
-        self.observer = NotificationCenter.default.addObserver(forName: notification, object: nil, queue: .main) { [unowned self] notif in
-            self.set(mutator(notif))
+        self.observer = NotificationCenter.default.addObserver(forName: notification, object: nil, queue: .main) { notif in
+            super.set(mutator(notif))
         }
+    }
+    
+    @available (*, unavailable)
+    public override func set(_ newValue: T) {
+        super.set(newValue)
     }
     
     deinit {
